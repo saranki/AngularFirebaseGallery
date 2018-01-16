@@ -31,4 +31,10 @@ export class ImageService {
     return this.db.list('upload').valueChanges();
   }
     
+  getImage(key: string) {
+    //Returns url for our images
+    //We need to get the url of the image only once in firebase by passing the key
+    return firebase.database().ref('upload/' + key).once('value')
+    .then((snap) => snap.val());
+  }
 }
